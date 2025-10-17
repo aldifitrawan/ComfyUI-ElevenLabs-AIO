@@ -1,0 +1,15 @@
+[project]
+name = "elevenlabs-comfyui"
+description = "Elevenlabs-ComfyUI: Complete ElevenLabs API integration - TTS, STT, Voice Cloning, Dubbing, Sound Effects & More"
+version = "1.0.0"
+license = {file = "LICENSE"}
+dependencies = ["requests>=2.25.0","torch>=2.0.0","torchaudio>=2.0.0"]
+
+[project.urls]
+Repository = "https://github.com/karthikg-09/Elevenlabs-ComfyUI"
+# Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = "kg-09"
+DisplayName = "Elevenlabs-ComfyUI"
+Icon = ""
