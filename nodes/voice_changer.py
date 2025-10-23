@@ -1,6 +1,7 @@
 """Voice Changer Node - Transform voices in audio"""
 
 import requests
+import json  # <-- ADDED
 from ..utils.api import fetch_voices_from_api
 from ..utils.audio import tensor_to_wav_buffer, load_audio_from_response, create_empty_audio
 from ..utils.cache import ElevenLabsCache
@@ -26,7 +27,10 @@ class ElevenLabsVoiceChanger:
                     "tooltip": "Your ElevenLabs API key - voices auto-refresh when changed"
                 }),
                 "audio": ("AUDIO",),
-                "target_voice": (voices,),
+                "target_voice": ("STRING", {
+                    "multiline": False,
+                    "default": ""
+                }),
                 "model": (["eleven_english_sts_v2", "eleven_multilingual_sts_v2", "eleven_turbo_v2"], {
                     "default": "eleven_english_sts_v2"
                 }),
@@ -84,15 +88,15 @@ class ElevenLabsVoiceChanger:
             "xi-api-key": api_key,
         }
         
-        # Data payload
+        # Data payload (voice_settings must be JSON-encoded string)
         data = {
             "model_id": model,
-            "voice_settings": {
+            "voice_settings": json.dumps({
                 "stability": stability,
                 "similarity_boost": similarity_boost,
                 "style": style,
                 "use_speaker_boost": use_speaker_boost
-            }
+            })
         }
         
         files = {
@@ -133,4 +137,3 @@ class ElevenLabsVoiceChanger:
     @classmethod
     def IS_CHANGED(cls, **kwargs):
         return float("nan")
-
