@@ -28,7 +28,10 @@ class ElevenLabsTTS:
                     "default": "Hello, how are you?",
                     "tooltip": "Text to convert to speech. Note: eleven_v3 has 3K char limit, other models 10K-40K"
                 }),
-                "voice": (voices,),
+                "voice": ("STRING", {
+                    "multiline": False,
+                    "default": ""
+                }),
                 "model": (models,),
                 "stability": ("FLOAT", {
                     "default": 0.5,
